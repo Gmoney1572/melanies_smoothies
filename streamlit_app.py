@@ -23,7 +23,7 @@ pd_df = my_dataframe.to_pandas()
 
 ingredients_list = st.multiselect(
     'Chose up to 5 ingredients:'
-    , my_dataframe
+    , pd_df['fruit_name']
     , max_selections = 5
 )
 
@@ -33,7 +33,7 @@ if ingredients_list:
     for fruits_chosen in ingredients_list:
         ingredients_string += fruits_chosen
         
-        search_on=pd_df.loc[pd_df['fruit_name'] == fruit_chosen, 'search_on'].iloc[0]
+        search_on=pd_df.loc[pd_df['fruit_name'] == fruits_chosen, 'search_on'].iloc[0]
         
         st.subheader(fruits_chosen + ' Nutrition Information')
         smoothiefroot_response = requests.get("https://my.smoothiefroot.com/api/fruit/"+fruits_chosen)
